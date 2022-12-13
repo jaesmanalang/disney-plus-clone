@@ -2,14 +2,10 @@ import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../constants";
 import Card from "./Card";
 
-export default function RowCards() {
+export default function RowCards({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
-    fetch(
-      `${API_BASE_URL}/movie/popular?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=en-US&page=1`
-    )
+    fetch(fetchUrl)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -18,20 +14,23 @@ export default function RowCards() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [fetchUrl]);
 
   return (
-    <div
-      className="flex gap-4 overflow-x-auto
+    <div className="mb-4">
+      <h4 className="text-2xl mb-2">{title}</h4>
+      <div
+        className="flex gap-4 overflow-x-auto
     "
-    >
-      {movies.map((movie) => (
-        <Card
-          key={movie.id}
-          posterPath={movie.poster_path}
-          originalTitle={movie.original_title}
-        />
-      ))}
+      >
+        {movies?.map((movie) => (
+          <Card
+            key={movie.id}
+            posterPath={movie.poster_path}
+            originalTitle={movie.original_title}
+          />
+        ))}
+      </div>
     </div>
   );
 }

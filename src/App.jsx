@@ -12,6 +12,7 @@ import {
 } from "react-icons/ri";
 import RowCards from "./components/RowCards";
 import Banner from "./components/Banner";
+import { request } from "./constants";
 
 export default function App() {
   return (
@@ -43,7 +44,10 @@ export default function App() {
       </div>
       <main className="ml-52 px-4">
         <Banner />
-        <RowCards />
+        <RowCards title="Popular" fetchUrl={request.popular} />
+        <RowCards title="Top Rated" fetchUrl={request.topRated} />
+        <RowCards title="Now Playing" fetchUrl={request.nowPlaying} />
+        <RowCards title="Upcoming" fetchUrl={request.upcoming} />
       </main>
     </div>
   );
