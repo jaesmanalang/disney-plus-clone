@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { API_BASE_URL, API_IMAGE_URL, request } from "../constants";
+import { API_IMAGE_URL, request } from "../constants";
 import Button from "./Button";
+import { RiPlayFill } from "react-icons/ri";
 
 export default function Banner() {
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -23,7 +24,7 @@ export default function Banner() {
   }
 
   return (
-    <div className="min-h-[90vh] mb-4 relative flex items-end">
+    <div className="min-h-[60vh] mb-4 relative flex items-end">
       {featuredMovie && (
         <div
           className="absolute h-full w-full"
@@ -44,8 +45,15 @@ export default function Banner() {
         <div className="max-w-md">{truncate(featuredMovie?.overview, 100)}</div>
         <div className="flex items-center">{featuredMovie?.genres}</div>
         <div className="flex items-center mt-3 gap-2">
-          <Button>Watch now</Button>
-          <Button variant="secondary">+</Button>
+          <Button className="text-2xl" size="lg">
+            <div className="flex items-center gap-3">
+              <RiPlayFill />
+              <span>Watch now</span>
+            </div>
+          </Button>
+          <Button className="text-2xl" size="lg">
+            +
+          </Button>
         </div>
       </div>
     </div>

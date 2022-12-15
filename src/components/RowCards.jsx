@@ -17,11 +17,8 @@ export default function RowCards({ title, fetchUrl }) {
 
   return (
     <div className="mb-4 pl-5">
-      <h4 className="text-2xl mb-2">{title}</h4>
-      <div
-        className="flex gap-4 overflow-x-auto
-    "
-      >
+      <h4 className="text-3xl mb-2 font-bold">{title}</h4>
+      <div className="flex flex-row gap-4 flex-nowrap overflow-x-auto">
         {movies?.map((movie) => (
           <Card
             key={movie.id}

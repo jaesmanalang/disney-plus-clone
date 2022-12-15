@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        secondary: "rgba(109, 109, 110, 0.7)",
+        primary: "rgba(255, 255, 255, 0.08)",
+        secondary: "rgba(255, 255, 255, 0.03)",
       },
       flexGrow: {
         2: 2,

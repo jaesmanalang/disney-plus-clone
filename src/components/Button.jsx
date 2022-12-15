@@ -5,13 +5,16 @@ export default function Button({
   className,
   variant = "primary",
   hover = true,
+  size = "default",
 }) {
   const buttonStyles = clsx(
-    `rounded-md px-4 py-2 inline-block cursor-pointer transition-all ease-in-out duration-300 ${className}`,
+    `rounded-md px-4 py-2 inline-block cursor-pointer transition-all ease-in-out duration-300 font-bold text-white ${className}`,
     {
-      "bg-white text-slate-800": variant === "primary",
-      "bg-secondary text-white": variant === "secondary",
-      "hover:scale-105": hover === true,
+      "bg-primary text-slate-800": variant === "primary",
+      "hover:bg-secondary": hover === true,
+      "px-4 py-2": size === "default",
+      "px-6 py-3": size === "md",
+      "px-8 py-4": size === "lg",
     }
   );
   return <button className={buttonStyles}>{children}</button>;
