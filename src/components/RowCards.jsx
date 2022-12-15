@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_BASE_URL } from "../constants";
+import { API_BASE_URL } from "../util/constants";
 import Card from "./Card";
 
 export default function RowCards({ title, fetchUrl }) {
@@ -22,6 +22,7 @@ export default function RowCards({ title, fetchUrl }) {
         {movies?.map((movie) => (
           <Card
             key={movie.id}
+            id={movie.id}
             posterPath={movie.poster_path}
             originalTitle={movie.original_title}
           />

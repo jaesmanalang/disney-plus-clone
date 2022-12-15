@@ -1,35 +1,24 @@
-import { useEffect, useState } from "react";
-import { API_IMAGE_URL, request } from "../constants";
-import Button from "./Button";
+import { useEffect } from "react";
+import { API_IMAGE_URL } from "../util/constants";
 import { RiPlayFill } from "react-icons/ri";
+import Button from "./Button";
+import { Link } from "react-router-dom";
 
-export default function Banner() {
-  const [featuredMovie, setFeaturedMovie] = useState(null);
-
-  useEffect(() => {
-    fetch(request.nowPlaying)
-      .then((res) => res.json())
-      .then((data) => {
-        const random = Math.floor(Math.random() * data.results.length - 1);
-        setFeaturedMovie(data.results[random]);
-        // console.log(data.results[random]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+export default function Banner({ featuredMedia }) {
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
+  if (!featuredMedia)
+    return <div className="min-h-[60vh] bg-gradient-to-t from-black"></div>;
+
   return (
     <div className="min-h-[60vh] mb-4 relative flex items-end">
-      {featuredMovie && (
+      {featuredMedia && (
         <div
           className="absolute h-full w-full"
           style={{
-            backgroundImage: `url(${API_IMAGE_URL}${featuredMovie.backdrop_path})`,
+            backgroundImage: `url(${API_IMAGE_URL}${featuredMedia.backdrop_path})`,
             backgroundSize: "cover",
             backgroundAttachment: "fixed",
           }}
@@ -39,20 +28,22 @@ export default function Banner() {
 
       <div className="relative p-5 w-1/2">
         <div className="font-bold text-6xl mb-3">
-          {featuredMovie?.original_title}
+          {featuredMedia?.original_title}
         </div>
-        <div>{featuredMovie?.release_date}</div>
-        <div className="max-w-md">{truncate(featuredMovie?.overview, 100)}</div>
-        <div className="flex items-center">{featuredMovie?.genres}</div>
+        <div>{featuredMedia?.release_date}</div>
+        <div className="max-w-md">{truncate(featuredMedia?.overview, 100)}</div>
+        {/* <div className="flex items-center">{featuredMedia?.genres}</div> */}
         <div className="flex items-center mt-3 gap-2">
-          <Button className="text-2xl" size="lg">
-            <div className="flex items-center gap-3">
-              <RiPlayFill />
-              <span>Watch now</span>
-            </div>
-          </Button>
-          <Button className="text-2xl" size="lg">
-            +
+          <Link to={`movie/${featuredMedia.id.toString()}`}>
+            <Button className="text-2xl" size="lg">
+              <div className="flex items-center gap-3">
+                <RiPlayFill />
+                <span>Watch now</span>
+              </div>
+            </Button>
+          </Link>
+          <Button className="text-2xl" variant="secondary" size="lg">
+            <span>+</span>
           </Button>
         </div>
       </div>

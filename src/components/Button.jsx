@@ -8,10 +8,11 @@ export default function Button({
   size = "default",
 }) {
   const buttonStyles = clsx(
-    `rounded-md px-4 py-2 inline-block cursor-pointer transition-all ease-in-out duration-300 font-bold text-white ${className}`,
+    `rounded-md px-4 py-2 inline-block cursor-pointer transition-all ease-in-out duration-300 font-bold text-inherit ${className}`,
     {
-      "bg-primary text-slate-800": variant === "primary",
-      "hover:bg-secondary": hover === true,
+      "bg-primary text-black": variant === "primary",
+      "bg-secondary text-white": variant === "secondary",
+      "hover:bg-hover hover:text-white": hover === true,
       "px-4 py-2": size === "default",
       "px-6 py-3": size === "md",
       "px-8 py-4": size === "lg",
