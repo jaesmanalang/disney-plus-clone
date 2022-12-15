@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_BASE_URL, API_IMAGE_URL, request } from "../constants";
+import Button from "./Button";
 
 export default function Banner() {
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -10,7 +11,7 @@ export default function Banner() {
       .then((data) => {
         const random = Math.floor(Math.random() * data.results.length - 1);
         setFeaturedMovie(data.results[random]);
-        console.log(data.results[random]);
+        // console.log(data.results[random]);
       })
       .catch((err) => {
         console.log(err);
@@ -32,21 +33,19 @@ export default function Banner() {
             backgroundAttachment: "fixed",
           }}
         ></div>
-        // <img
-        //   className="object-cover h-full w-full fixed"
-        //   src={`${API_IMAGE_URL}${featuredMovie.backdrop_path}`}
-        //   alt={featuredMovie.original_title}
-        // />
       )}
       <div className="absolute bg-gradient-to-t from-black top-0 left-0 h-full w-full"></div>
 
-      <div className="relative p-5 w-1/4">
-        <div>{featuredMovie.release_date}</div>
-        <div>{truncate(featuredMovie.overview, 80)}</div>
-        <div className="flex items-center">{featuredMovie.genres}</div>
-        <div className="flex items-center">
-          <button>Watch now</button>
-          <button>+</button>
+      <div className="relative p-5 w-1/2">
+        <div className="font-bold text-6xl mb-3">
+          {featuredMovie?.original_title}
+        </div>
+        <div>{featuredMovie?.release_date}</div>
+        <div className="max-w-md">{truncate(featuredMovie?.overview, 100)}</div>
+        <div className="flex items-center">{featuredMovie?.genres}</div>
+        <div className="flex items-center mt-3 gap-2">
+          <Button>Watch now</Button>
+          <Button variant="secondary">+</Button>
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@ export default function RowCards({ title, fetchUrl }) {
     fetch(fetchUrl)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMovies(data.results);
       })
       .catch((err) => {
@@ -17,7 +16,7 @@ export default function RowCards({ title, fetchUrl }) {
   }, [fetchUrl]);
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 pl-5">
       <h4 className="text-2xl mb-2">{title}</h4>
       <div
         className="flex gap-4 overflow-x-auto
