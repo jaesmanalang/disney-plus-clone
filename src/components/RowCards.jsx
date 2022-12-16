@@ -9,15 +9,20 @@ export default function RowCards({ title, fetchUrl }) {
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
+        console.log(data.results);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [fetchUrl]);
 
+  if (movies.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="mb-4 pl-5">
-      <h4 className="text-3xl mb-2 font-bold">{title}</h4>
+    <div className="mb-8 pl-5">
+      <h4 className="text-3xl mb-3 font-semibold">{title}</h4>
       <div className="flex flex-row gap-4 flex-nowrap overflow-x-auto">
         {movies?.map((movie) => (
           <Card

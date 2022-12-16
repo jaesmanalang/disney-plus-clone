@@ -8,10 +8,9 @@ export default function App() {
     <BrowserRouter>
       <RootLayout>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movie">
-            <Route path=":id" element={<MediaDetails />} />
-          </Route>
+          <Route exact path="/" element={<Home />} />
+
+          <Route exact path="/movie/:id" element={<MediaDetails />} />
         </Routes>
       </RootLayout>
     </BrowserRouter>

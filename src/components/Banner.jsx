@@ -14,7 +14,7 @@ export default function Banner({ featuredMedia }) {
 
   return (
     <div className="min-h-[60vh] mb-4 relative flex items-end">
-      {featuredMedia && (
+      {featuredMedia && featuredMedia.backdrop_path && (
         <div
           className="absolute h-full w-full"
           style={{
