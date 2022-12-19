@@ -50,7 +50,7 @@ export default function MediaDetails() {
   return (
     <div>
       <Banner featuredMedia={media} />
-      <RowCards title="Similar movies" fetchUrl={fetchSimilarUrl} />
+      <RowCards title="More like this" fetchUrl={fetchSimilarUrl} />
       <RowCards title="Recommended" fetchUrl={fetchRecommendationUrl} />
     </div>
   );
