@@ -39,17 +39,13 @@ export default function MediaDetails() {
     loadMovieDetails();
   }, [id]);
 
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
   // if (error) {
   //   return <div>{error}</div>;
   // }
 
   return (
     <div>
-      <Banner featuredMedia={media} />
+      <Banner featuredMedia={media} isLoading={isLoading} />
       <RowCards title="More like this" fetchUrl={fetchSimilarUrl} />
       <RowCards title="Recommended" fetchUrl={fetchRecommendationUrl} />
     </div>

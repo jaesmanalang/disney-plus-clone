@@ -30,8 +30,9 @@ export default function RowCards({ title, fetchUrl }) {
     <div className="mb-8 pl-5">
       <h4 className="text-lg md:text-3xl mb-3 font-semibold">{title}</h4>
       <div className="flex flex-row gap-4 flex-nowrap overflow-x-auto">
-        {isLoading && <SkeletonCard cards={8} />}
-        {!isLoading &&
+        {isLoading ? (
+          <SkeletonCard cards={8} />
+        ) : (
           movies?.map((movie) => (
             <Card
               key={movie.id}
@@ -39,7 +40,8 @@ export default function RowCards({ title, fetchUrl }) {
               posterPath={movie.poster_path}
               originalTitle={movie.original_title}
             />
-          ))}
+          ))
+        )}
       </div>
     </div>
   );
