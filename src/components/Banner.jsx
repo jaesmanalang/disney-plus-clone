@@ -9,12 +9,9 @@ export default function Banner({ featuredMedia }) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
-  if (!featuredMedia)
-    return <div className="min-h-[60vh] bg-gradient-to-t from-black"></div>;
-
   return (
-    <div className="min-h-[60vh] mb-4 relative flex items-end">
-      {featuredMedia && featuredMedia.backdrop_path && (
+    <div className="h-[calc(100vh_-_160px)] min-h-[450px] mb-4 relative flex items-end">
+      {featuredMedia && featuredMedia.backdrop_path ? (
         <div
           className="absolute h-full w-full"
           style={{
@@ -23,8 +20,11 @@ export default function Banner({ featuredMedia }) {
             backgroundAttachment: "fixed",
           }}
         ></div>
+      ) : (
+        <div className="w-full h-full absolute bg-gradient-to-r from-black to-[#373c4d]"></div>
       )}
       <div className="absolute bg-gradient-to-t from-black top-0 left-0 h-full w-full"></div>
+      <div className="absolute bg-gradient-to-r from-black top-0 left-0 h-full w-[320px]"></div>
 
       <div className="relative p-5 w-1/2">
         <div className="font-bold text-6xl mb-3">
