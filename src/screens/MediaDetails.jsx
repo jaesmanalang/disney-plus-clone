@@ -4,6 +4,7 @@ import { getMovieDetails } from "../util/api";
 import { API_BASE_URL } from "../util/constants";
 import Banner from "../components/Banner";
 import RowCards from "../components/RowCards";
+import SkeletonCard from "../components/SkeletonCard";
 
 export default function MediaDetails() {
   const [media, setMedia] = useState(null);

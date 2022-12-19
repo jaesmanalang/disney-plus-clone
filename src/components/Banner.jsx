@@ -34,7 +34,7 @@ export default function Banner({ featuredMedia }) {
         <div className="max-w-md">{truncate(featuredMedia?.overview, 100)}</div>
         {/* <div className="flex items-center">{featuredMedia?.genres}</div> */}
         <div className="flex items-center mt-3 gap-2">
-          <Link to={`movie/${featuredMedia.id.toString()}`}>
+          <Link to={`movie/${featuredMedia?.id.toString()}`}>
             <Button className="text-2xl" size="lg">
               <div className="flex items-center gap-3">
                 <RiPlayFill />
