@@ -15,26 +15,42 @@ export default function NavLinks() {
     {
       title: "Search",
       path: "/search",
-      activeIcon: <RiSearchFill />,
-      inActiveIcon: <RiSearchLine />,
+      activeIcon: (
+        <RiSearchFill className="transition-colors duration-300 ease-in-out" />
+      ),
+      inActiveIcon: (
+        <RiSearchLine className="transition-colors duration-300 ease-in-out" />
+      ),
     },
     {
       title: "Home",
       path: "/",
-      activeIcon: <RiHome4Fill />,
-      inActiveIcon: <RiHome4Line />,
+      activeIcon: (
+        <RiHome4Fill className="transition-colors duration-300 ease-in-out" />
+      ),
+      inActiveIcon: (
+        <RiHome4Line className="transition-colors duration-300 ease-in-out" />
+      ),
     },
     {
       title: "TV Shows",
       path: "/tv/shows",
-      activeIcon: <RiTvFill />,
-      inActiveIcon: <RiTvLine />,
+      activeIcon: (
+        <RiTvFill className="transition-colors duration-300 ease-in-out" />
+      ),
+      inActiveIcon: (
+        <RiTvLine className="transition-colors duration-300 ease-in-out" />
+      ),
     },
     {
       title: "Movies",
       path: "/movie/shows",
-      activeIcon: <RiFilmFill />,
-      inActiveIcon: <RiFilmLine />,
+      activeIcon: (
+        <RiFilmFill className="transition-colors duration-300 ease-in-out" />
+      ),
+      inActiveIcon: (
+        <RiFilmLine className="transition-colors duration-300 ease-in-out" />
+      ),
     },
   ];
   return (
