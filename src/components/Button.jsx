@@ -15,7 +15,7 @@ export default function Button({
       "hover:bg-hover hover:text-white": hover === true,
       "px-4 py-2": size === "default",
       "px-6 py-3": size === "md",
-      "px-8 py-4": size === "lg",
+      "px-4 py-2 md:px-8 md:py-4": size === "lg",
     }
   );
   return <button className={buttonStyles}>{children}</button>;

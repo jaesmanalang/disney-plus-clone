@@ -4,7 +4,7 @@ import { API_IMAGE_URL } from "../util/constants";
 
 export default function Card({ id, posterPath, originalTitle }) {
   return (
-    <div className="w-[13%] flex items-center shrink-0 cursor-pointer group">
+    <div className="w-[25%] md:w-[13%] flex items-center shrink-0 cursor-pointer group">
       <Link
         className="w-full h-full rounded-md overflow-hidden"
         to={`/movie/${id.toString()}`}

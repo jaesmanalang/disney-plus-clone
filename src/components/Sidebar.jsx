@@ -4,7 +4,7 @@ import NavLinks from "./NavLinks";
 
 export default function Sidebar() {
   return (
-    <div className="fixed left-0 top-0 bottom-0 flex flex-col w-28 z-40">
+    <div className="fixed left-0 top-0 bottom-0 hidden lg:flex flex-col w-28 z-40">
       <Link to="/" className="py-8 px-6 fixed top-0 left-0 z-50">
         <img
           className="w-[74px] max-w-full block"
