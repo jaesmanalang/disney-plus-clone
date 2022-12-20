@@ -37,6 +37,8 @@ export default function MediaDetails() {
     }
 
     loadMovieDetails();
+
+    window.scrollTo(0, 0);
   }, [id]);
 
   // if (error) {
