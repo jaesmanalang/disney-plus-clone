@@ -13,3 +13,17 @@ export async function getMovieDetails(id) {
     return error;
   }
 }
+
+export async function searchMulti(query) {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/search/multi?api_key=${
+        import.meta.env.VITE_API_KEY
+      }&language=en-US&query=${query}&page=1&include_adult=false`
+    );
+
+    return response.json();
+  } catch (error) {
+    return error;
+  }
+}

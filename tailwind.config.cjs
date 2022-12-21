@@ -2,6 +2,9 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       colors: {
         primary: "rgba(255, 255, 255, 0.8)",
