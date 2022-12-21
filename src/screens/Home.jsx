@@ -3,7 +3,6 @@ import { request } from "../util/constants";
 import { getMovieDetails } from "../util/api";
 import Banner from "../components/Banner";
 import RowCards from "../components/RowCards";
-import { RiLoader3Line } from "react-icons/ri";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);

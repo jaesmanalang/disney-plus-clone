@@ -3,7 +3,6 @@ import { API_IMAGE_URL } from "../util/constants";
 import { RiPlayFill } from "react-icons/ri";
 import Button from "./Button";
 import { Link } from "react-router-dom";
-import { RiLoader3Line } from "react-icons/ri";
 
 export default function Banner({ featuredMedia, isLoading }) {
   const [imgLoaded, setImgLoaded] = useState(false);

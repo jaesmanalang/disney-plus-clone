@@ -26,11 +26,10 @@ export default function MediaDetails() {
       setIsLoading(true);
       try {
         const movie = await getMovieDetails(id);
-        console.log(movie);
+
         setMedia(movie);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
         setError(error);
         setIsLoading(false);
       }

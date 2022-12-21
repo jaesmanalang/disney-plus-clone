@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { RiSearchLine, RiCloseLine } from "react-icons/ri";
 import { searchMulti } from "../util/api";
-import SkeletonCard from "../components/SkeletonCard";
 import Card from "../components/Card";
 import Spinner from "../components/Spinner";
 
@@ -10,6 +9,7 @@ export default function Search() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
+  const [error, setError] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,9 +28,11 @@ export default function Search() {
       }
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   }
+
+  if (error) return <div>Sorry, an error occured... pls refresh the page</div>;
 
   useEffect(() => {
     console.log(searchResults);
@@ -61,23 +63,24 @@ export default function Search() {
       </form>
       <div className="mt-8">
         {showMessage && <div>No results found</div>}
-        <div className="flex gap-4 flex-wrap">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {isLoading && (
-            <div className="min-h-[50vh] w-full p-10 flex items-start justify-center">
+            <div className="min-h-[50vh] w-full p-10 flex items-start col-span-full justify-center">
               <Spinner />
             </div>
           )}
           {!isLoading &&
             searchResults.length > 0 &&
             searchResults.map((movie) => (
-              <Card
-                key={movie.id}
-                id={movie.id}
-                posterPath={movie.poster_path}
-                mediaType={movie.media_type}
-                originalTitle={movie.original_title}
-                originalName={movie.original_name}
-              />
+              <div key={movie.id}>
+                <Card
+                  id={movie.id}
+                  posterPath={movie.poster_path}
+                  mediaType={movie.media_type}
+                  originalTitle={movie.original_title}
+                  originalName={movie.original_name}
+                />
+              </div>
             ))}
         </div>
       </div>

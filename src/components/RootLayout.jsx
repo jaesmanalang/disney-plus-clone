@@ -5,7 +5,7 @@ export default function RootLayout({ children }) {
     <>
       <Sidebar />
       <main className="lg:ml-28">
-        <div className="container">{children}</div>
+        <div>{children}</div>
       </main>
     </>
   );
