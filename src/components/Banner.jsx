@@ -4,28 +4,14 @@ import { RiPlayFill } from "react-icons/ri";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-export default function Banner({ featuredMedia, isLoading }) {
-  const [imgLoaded, setImgLoaded] = useState(false);
-
-  useEffect(() => {
-    if (featuredMedia && featuredMedia.backdrop_path) {
-      setImgLoaded(true);
-    }
-  }, [featuredMedia]);
-
+export default function Banner({ featuredMedia }) {
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
-  if (isLoading) {
-    return (
-      <div className="min-h-[60vh] lg:min-h-[calc(100vh_-_160px)] bg-gradient-to-r mb-4 from-black to-gray-900 animate-pulse"></div>
-    );
-  }
-
   return (
-    <div className="min-h-[60vh] lg:min-h-[calc(100vh_-_160px)] mb-4 relative flex items-end">
-      {featuredMedia && featuredMedia.backdrop_path && imgLoaded ? (
+    <div className="min-h-[60vh] lg:min-h-[calc(100vh_-_160px)] mb-4 relative flex items-end pt-[84px] lg:pt-0">
+      {featuredMedia && featuredMedia.backdrop_path ? (
         <div
           className="absolute h-full w-full"
           style={{
@@ -67,7 +53,7 @@ export default function Banner({ featuredMedia, isLoading }) {
         </div>
         {/* <div className="flex items-center">{featuredMedia?.genres}</div> */}
         <div className="flex items-center mt-4 gap-2">
-          <Link to={`movie/${featuredMedia?.id?.toString()}`}>
+          <Link to={`/movie/${featuredMedia?.id?.toString()}`}>
             <Button className="text-base md:text-2xl" size="lg">
               <div className="flex items-center gap-3">
                 <RiPlayFill />

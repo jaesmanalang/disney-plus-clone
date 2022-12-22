@@ -16,4 +16,7 @@ export const request = {
   nowPlaying: `https://api.themoviedb.org/3/movie/now_playing?api_key=${
     import.meta.env.VITE_API_KEY
   }&language=en-US`,
+  search: `https://api.themoviedb.org/3/search/multi?api_key=${
+    import.meta.env.VITE_API_KEY
+  }&language=en-US&page=1&include_adult=false`,
 };

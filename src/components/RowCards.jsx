@@ -4,11 +4,10 @@ import Card from "./Card";
 import SkeletonCard from "./SkeletonCard";
 import Slider from "react-slick";
 import CustomArrow from "./CustomArrow";
+import useFetch from "../hooks/useFetch";
 
 export default function RowCards({ title, fetchUrl }) {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { data, isLoading, error } = useFetch(fetchUrl);
   const prevEl = createRef();
   const nextEl = createRef();
 
@@ -31,6 +30,7 @@ export default function RowCards({ title, fetchUrl }) {
         breakpoint: 1024,
         settings: {
           slidesToShow: 4,
+          slidesToScroll: 3,
           centerMode: false,
         },
       },
@@ -38,6 +38,7 @@ export default function RowCards({ title, fetchUrl }) {
         breakpoint: 767,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },
@@ -45,6 +46,7 @@ export default function RowCards({ title, fetchUrl }) {
         breakpoint: 639,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 2,
           centerMode: false,
           arrows: false,
         },
@@ -52,23 +54,7 @@ export default function RowCards({ title, fetchUrl }) {
     ],
   };
 
-  useEffect(() => {
-    if (fetchUrl) {
-      setIsLoading(true);
-      fetch(fetchUrl)
-        .then((res) => res.json())
-        .then((data) => {
-          setMovies(data.results);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setError(err);
-          setIsLoading(false);
-        });
-    }
-  }, [fetchUrl]);
-
-  if (movies.length === 0) {
+  if (data.length === 0) {
     return null;
   }
 
@@ -90,9 +76,9 @@ export default function RowCards({ title, fetchUrl }) {
     <div className="mb-8 pl-5 pr-5">
       <h4 className="text-lg md:text-3xl mb-3 font-semibold">{title}</h4>
       <div onMouseEnter={showArrows} onMouseLeave={hideArrows}>
-        {!isLoading && movies.length > 0 && (
+        {!isLoading && data.length > 0 && (
           <Slider {...settings}>
-            {movies.map((movie) => (
+            {data.map((movie) => (
               <Card
                 key={movie.id}
                 id={movie.id}
@@ -105,8 +91,14 @@ export default function RowCards({ title, fetchUrl }) {
       </div>
 
       {isLoading && (
-        <div className="flex flex-row gap-4 flex-nowrap overflow-x-auto">
-          <SkeletonCard cards={8} />
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          {Array(8)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index}>
+                <SkeletonCard />
+              </div>
+            ))}
         </div>
       )}
     </div>

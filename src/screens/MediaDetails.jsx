@@ -22,31 +22,38 @@ export default function MediaDetails() {
   }&language=en-US&page=1`;
 
   useEffect(() => {
+    let subscribed = true;
     async function loadMovieDetails() {
       setIsLoading(true);
       try {
         const movie = await getMovieDetails(id);
-
-        setMedia(movie);
-        setIsLoading(false);
+        if (subscribed) {
+          setMedia(movie);
+          setIsLoading(false);
+        }
       } catch (error) {
-        setError(error);
-        setIsLoading(false);
+        if (subscribed) {
+          setError(error);
+          setIsLoading(false);
+        }
       }
     }
 
     loadMovieDetails();
 
     window.scrollTo(0, 0);
+
+    return () => {
+      subscribed = false;
+      setMedia(null);
+    };
   }, [id]);
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
+  // if (isLoading) return <div>loading...</div>;
 
   return (
     <div>
-      <Banner featuredMedia={media} isLoading={isLoading} />
+      <Banner featuredMedia={media} />
       <RowCards title="More like this" fetchUrl={fetchSimilarUrl} />
       <RowCards title="Recommended" fetchUrl={fetchRecommendationUrl} />
     </div>

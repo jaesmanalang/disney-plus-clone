@@ -34,12 +34,8 @@ export default function Search() {
 
   if (error) return <div>Sorry, an error occured... pls refresh the page</div>;
 
-  useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults]);
-
   return (
-    <div className="py-4">
+    <div className="p-4 mt-[84px] lg:mt-0">
       <form onSubmit={handleSubmit}>
         <div className="relative">
           <RiSearchLine className="text-2xl text-gray-600 absolute left-4 top-1/2 -translate-y-1/2" />
@@ -55,7 +51,7 @@ export default function Search() {
           <input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="block text-2xl py-3 pr-4 pl-12 rounded-md border-2 border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-600 w-full bg-transparent"
+            className="block text-lg md:text-2xl py-3 pr-4 pl-12 rounded-md border-2 border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-600 w-full bg-transparent"
             placeholder="Search movies or tv shows..."
             type="text"
           />
