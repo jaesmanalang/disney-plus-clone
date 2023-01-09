@@ -1,10 +1,10 @@
-import { useEffect, useState, createRef, useRef } from "react";
-import { API_BASE_URL } from "../util/constants";
-import Card from "./Card";
-import SkeletonCard from "./SkeletonCard";
-import Slider from "react-slick";
-import CustomArrow from "./CustomArrow";
-import useFetch from "../hooks/useFetch";
+import { useEffect, useState, createRef, useRef } from 'react';
+import { API_BASE_URL } from '../util/constants';
+import Card from './Card';
+import SkeletonCard from './SkeletonCard';
+import Slider from 'react-slick';
+import CustomArrow from './CustomArrow';
+import useFetch from '../hooks/useFetch';
 
 export default function RowCards({ title, fetchUrl }) {
   const { data, isLoading, error } = useFetch(fetchUrl);
@@ -54,21 +54,21 @@ export default function RowCards({ title, fetchUrl }) {
     ],
   };
 
-  if (data.length === 0) {
+  if (!data || data.length === 0) {
     return null;
   }
 
   function showArrows() {
     if (nextEl.current && prevEl.current) {
-      nextEl.current.style.display = "block";
-      prevEl.current.style.display = "block";
+      nextEl.current.style.display = 'block';
+      prevEl.current.style.display = 'block';
     }
   }
 
   function hideArrows() {
     if (nextEl.current && prevEl.current) {
-      nextEl.current.style.display = "none";
-      prevEl.current.style.display = "none";
+      nextEl.current.style.display = 'none';
+      prevEl.current.style.display = 'none';
     }
   }
 
@@ -76,7 +76,7 @@ export default function RowCards({ title, fetchUrl }) {
     <div className="mb-8 pl-5 pr-5">
       <h4 className="text-lg md:text-3xl mb-3 font-semibold">{title}</h4>
       <div onMouseEnter={showArrows} onMouseLeave={hideArrows}>
-        {!isLoading && data.length > 0 && (
+        {!isLoading && data?.length > 0 && (
           <Slider {...settings}>
             {data.map((movie) => (
               <Card

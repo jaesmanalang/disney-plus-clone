@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from 'react';
 
 const initialState = {
   data: [],
@@ -8,19 +8,19 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "fetch_data_begin":
+    case 'fetch_data_begin':
       return {
         ...state,
         isLoading: true,
       };
-    case "fetch_data_success":
+    case 'fetch_data_success':
       return {
         ...state,
         isLoading: false,
         data: action.payload,
       };
 
-    case "fetch_data_failure":
+    case 'fetch_data_failure':
       return {
         ...state,
         isLoading: false,
@@ -36,13 +36,13 @@ export default function useFetch(url) {
 
   useEffect(() => {
     let subscribed = true;
-    dispatch({ type: "fetch_data_begin" });
+    dispatch({ type: 'fetch_data_begin' });
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (subscribed) {
           dispatch({
-            type: "fetch_data_success",
+            type: 'fetch_data_success',
             payload: data.results,
           });
         }
@@ -50,7 +50,7 @@ export default function useFetch(url) {
       .catch((error) => {
         if (subscribed) {
           dispatch({
-            type: "fetch_data_failure",
+            type: 'fetch_data_failure',
             payload: error,
           });
         }

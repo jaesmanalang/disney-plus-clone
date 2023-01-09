@@ -1,20 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { API_IMAGE_URL } from "../util/constants";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { API_IMAGE_URL } from '../util/constants';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-export default function Card({
-  id,
-  posterPath,
-  mediaType,
-  originalTitle,
-  originalName,
-}) {
+export default function Card({ id, posterPath, originalTitle, originalName }) {
   return (
     <div className="cursor-pointer group overflow-hidden rounded-md relative pt-[150%] bg-gray-900 w-full">
       <Link
         className="w-full h-full rounded-md overflow-hidden absolute top-0 left-0"
-        to={`/movie/${id.toString()}`}
+        to={`/${originalTitle ? 'movie' : 'tv'}/shows/${id.toString()}`}
       >
         {posterPath ? (
           <LazyLoadImage
@@ -24,8 +18,7 @@ export default function Card({
           />
         ) : (
           <div className="text-center font-bold flex items-center justify-center h-full w-full">
-            {mediaType === "tv" && originalName}
-            {mediaType === "movie" && originalTitle}
+            {originalName || originalTitle}
           </div>
         )}
       </Link>

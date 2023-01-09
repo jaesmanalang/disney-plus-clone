@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { RiSearchLine, RiCloseLine } from "react-icons/ri";
-import { searchMulti } from "../util/api";
-import Card from "../components/Card";
-import Spinner from "../components/Spinner";
+import { useEffect, useState } from 'react';
+import { RiSearchLine, RiCloseLine } from 'react-icons/ri';
+import { searchMulti } from '../util/api';
+import Card from '../components/Card';
+import Spinner from '../components/Spinner';
 
 export default function Search() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
@@ -18,7 +18,7 @@ export default function Search() {
     try {
       const data = await searchMulti(searchQuery);
       const filteredResults = data.results.filter(
-        (result) => result.media_type !== "person"
+        (result) => result.media_type !== 'person'
       );
       setSearchResults(filteredResults);
       if (data.results.length === 0) {
@@ -42,7 +42,7 @@ export default function Search() {
           {searchQuery && (
             <button
               type="button"
-              onClick={() => setSearchQuery("")}
+              onClick={() => setSearchQuery('')}
               className="text-2xl text-gray-600 absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
             >
               <RiCloseLine className="text-3xl" />
@@ -72,7 +72,6 @@ export default function Search() {
                 <Card
                   id={movie.id}
                   posterPath={movie.poster_path}
-                  mediaType={movie.media_type}
                   originalTitle={movie.original_title}
                   originalName={movie.original_name}
                 />

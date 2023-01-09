@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { API_IMAGE_URL } from "../util/constants";
-import { RiPlayFill } from "react-icons/ri";
-import Button from "./Button";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { API_IMAGE_URL } from '../util/constants';
+import { RiPlayFill } from 'react-icons/ri';
+import Button from './Button';
+import { Link } from 'react-router-dom';
 
-export default function Banner({ featuredMedia }) {
+export default function Banner({ featuredMedia, mediaType = 'movie' }) {
   function truncate(string, n) {
-    return string?.length > n ? string.substr(0, n - 1) + "..." : string;
+    return string?.length > n ? string.substr(0, n - 1) + '...' : string;
   }
 
   return (
@@ -16,10 +16,10 @@ export default function Banner({ featuredMedia }) {
           className="absolute h-full w-full"
           style={{
             backgroundImage: `url(${API_IMAGE_URL}${featuredMedia.backdrop_path})`,
-            backgroundSize: "cover",
-            backgroundAttachment: "fixed",
-            backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat",
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center top',
+            backgroundRepeat: 'no-repeat',
           }}
         ></div>
       ) : (
@@ -39,36 +39,39 @@ export default function Banner({ featuredMedia }) {
           />
         ) : (
           <div className="font-bold text-xl md:text-3xl mb-3">
-            {featuredMedia?.original_title}
+            {featuredMedia?.original_title || featuredMedia?.original_name}
           </div>
         )}
 
         {featuredMedia && (
-          <div className="mb-2 text-sm md:text-base">
-            {new Date(featuredMedia.release_date).getFullYear().toString()}
-          </div>
+          <>
+            <div className="mb-2 text-sm md:text-base">
+              {featuredMedia.release_date
+                ? new Date(featuredMedia.release_date).getFullYear().toString()
+                : ''}
+            </div>
+            <div className="max-w-md text-sm md:text-base">
+              {truncate(featuredMedia?.overview, 100)}
+            </div>
+            <div className="flex items-center mt-4 gap-2">
+              <Link to={`/${mediaType}/shows/${featuredMedia?.id?.toString()}`}>
+                <Button className="text-base md:text-2xl" size="lg">
+                  <div className="flex items-center gap-3">
+                    <RiPlayFill />
+                    <span>Watch now</span>
+                  </div>
+                </Button>
+              </Link>
+              <Button
+                className="text-base md:text-2xl"
+                variant="secondary"
+                size="lg"
+              >
+                <span>+</span>
+              </Button>
+            </div>
+          </>
         )}
-        <div className="max-w-md text-sm md:text-base">
-          {truncate(featuredMedia?.overview, 100)}
-        </div>
-        {/* <div className="flex items-center">{featuredMedia?.genres}</div> */}
-        <div className="flex items-center mt-4 gap-2">
-          <Link to={`/movie/${featuredMedia?.id?.toString()}`}>
-            <Button className="text-base md:text-2xl" size="lg">
-              <div className="flex items-center gap-3">
-                <RiPlayFill />
-                <span>Watch now</span>
-              </div>
-            </Button>
-          </Link>
-          <Button
-            className="text-base md:text-2xl"
-            variant="secondary"
-            size="lg"
-          >
-            <span>+</span>
-          </Button>
-        </div>
       </div>
     </div>
   );
