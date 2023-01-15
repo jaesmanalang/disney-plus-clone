@@ -5,12 +5,14 @@ import MediaDetails from './screens/MediaDetails';
 import Search from './screens/Search';
 import Movies from './screens/Movies';
 import TvShows from './screens/TvShows';
+import NotFound from './screens/NotFound';
 
 export default function App() {
   return (
     <BrowserRouter>
       <RootLayout>
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route exact path="/movie/shows" element={<Movies />} />

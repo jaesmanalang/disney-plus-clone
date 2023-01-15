@@ -5,11 +5,13 @@ import { API_BASE_URL } from '../util/constants';
 import Banner from '../components/Banner';
 import RowCards from '../components/RowCards';
 import SkeletonCard from '../components/SkeletonCard';
+import NotFound from './NotFound';
 
 export default function MediaDetails({ mediaType = 'movie' }) {
   const [media, setMedia] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [mediaNotFound, setMediaNotfound] = useState(false);
 
   const params = useParams();
   const { id } = params;
@@ -28,8 +30,12 @@ export default function MediaDetails({ mediaType = 'movie' }) {
       try {
         const movie = await getMovieDetails(id, mediaType);
         if (subscribed) {
-          setMedia(movie);
-          setIsLoading(false);
+          if (movie.status_code === 34) {
+            setMediaNotfound(true);
+          } else {
+            setMedia(movie);
+            setIsLoading(false);
+          }
         }
       } catch (error) {
         if (subscribed) {
@@ -54,6 +60,10 @@ export default function MediaDetails({ mediaType = 'movie' }) {
 
   if (error) {
     return <div>An error occured.</div>;
+  }
+
+  if (mediaNotFound) {
+    return <NotFound />;
   }
 
   return (
